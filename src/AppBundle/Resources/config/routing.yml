@@ -1,0 +1,38 @@
+app_homepage:
+    path:    /
+    defaults:
+        _controller: AppBundle:Site:index
+
+
+#Account routing
+app_createAccount:
+    path:    /create_account
+    defaults:
+        _controller: AppBundle:Site:CreateAccount
+
+app_showAccount:
+    path:    /show_account
+    defaults:
+        _controller: AppBundle:Site:ShowAccount
+
+
+#Addvert routing
+app_viewAdd:
+    path:    /add
+    defaults:
+        _controller: AppBundle:Site:ViewAdd
+
+app_editAdd:
+    path:    /edit_add
+    defaults:
+        _controller: AppBundle:Site:EditAdd
+
+app_newAdd:
+    path:    /new_add
+    defaults:
+        _controller: AppBundle:Site:NewAdd
+
+app_deleteAdd:
+    path:    /delete_add
+    defaults:
+        _controller: AppBundle:Site:DeleteAdd
