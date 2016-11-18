@@ -3,12 +3,18 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Repository\AdvertRepository;
 
 class SiteController extends Controller{
 
     public function indexAction(){
 
-        return $this->render('AppBundle:Default:index.html.twig');
+        $emAdvert = $this->getDoctrine()->getRepository('AppBundle:Advert');
+        $listAdvert = $emAdvert->findAll();
+
+        return $this->render('AppBundle:Default:index.html.twig', array(
+            'listAdvert' => $listAdvert,
+        ));
     }
 
     public function CreateAccountAction (){
