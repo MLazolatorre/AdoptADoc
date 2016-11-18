@@ -18,9 +18,11 @@ app_showAccount:
 
 #Addvert routing
 app_viewAdd:
-    path:    /add
+    path:    /add/{id}
     defaults:
         _controller: AppBundle:Site:ViewAdd
+    requirements:
+        id: \d+
 
 app_editAdd:
     path:    /edit_add
