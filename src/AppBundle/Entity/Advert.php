@@ -49,9 +49,16 @@ class Advert
      */
     private $date;
 
+    /**
+     * @var Image
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade = {"persist"})
+     */
+    private $image;
 
 
-
+    /**
+     * Advert constructor.
+     */
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -162,5 +169,28 @@ class Advert
     {
         return $this->date;
     }
-}
 
+    /**
+     * Set image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Advert
+     */
+    public function setImage(\AppBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \AppBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+}
