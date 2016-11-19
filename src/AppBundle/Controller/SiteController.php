@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Advert;
 use AppBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Debug\Exception\UndefinedFunctionException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
@@ -17,43 +19,35 @@ class SiteController extends Controller{
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
         $listAdvert = $advertRepository->findAll();
 
-        //TODO renomer la page (default:index....)
-        return $this->render('AppBundle:Default:index.html.twig', array(
+        return $this->render('AppBundle:Sit:index.html.twig', array(
             'listAdvert' => $listAdvert,
         ));
     }
 
-    public function createAccountAction (){
-
+    public function createAccountAction ()
+    {
         return $this->render('AppBundle:Default:index.html.twig');
     }
 
-    public function showAccountAction (){
-
+    public function showAccountAction ()
+    {
         return $this->render('AppBundle:Default:index.html.twig');
     }
 
     public function viewAddAction ($id)
     {
-        //we select the advert id
+        //we look for the advert in the DB with the ID
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
         $advert = $advertRepository->find($id);
 
         //we check if the advert exist
         if ($advert == null){
-            throw new NotFoundHttpException('The page with the id : ' . $id . "dosen't exist");
+            throw new NotFoundHttpException("The page with the id : " . $id . " dosen't exist");
         }
 
-        //TODO renomer la page (default:index....)
-        return $this->render('AppBundle:Default:index.html.twig', array(
+        return $this->render('AppBundle:Sit:viewAdd.html.twig', array(
             'advert'    => $advert,
         ));
-    }
-
-    public function editAddAction ()
-    {
-
-        return $this->render('AppBundle:Default:index.html.twig');
     }
 
     public function newAddAction (Request $request)
@@ -71,12 +65,48 @@ class SiteController extends Controller{
 
             $request->getSession()->getFlashBag()->add('notice', 'Advert saved.');
 
+
             return $this->redirectToRoute('app_viewAdd', array(
                 'id' => $advert->getId(),
             ));
         }
 
-        return $this->render('AppBundle:Default:index.html.twig');  //TODO return sur la bonne page
+        return $this->render('AppBundle:Sit:newAdvert.html.twig', array(
+            'form'  =>  $form->createView(),
+        ));
+    }
+
+    public function editAddAction ($id, Request $request)
+    {
+        //we look for the advert in the DB with th eID
+        $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
+        $advert = $advertRepository->find($id);
+
+        //we check if the id exist
+        if ($advert == null){
+            throw new NotFoundHttpException ("The page with the id : " . $id . " dosen't exist");
+        }
+
+        $form = $this->get('form.factory')->create(AdvertType::class, $advert);
+
+        //if POST => the use try to edit the advert
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            //no persist because the advert exited already
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            //flash bag to prevent that the advert was been well saved
+            $request->getSession()->getFlashBag()->add('notice', 'Advert saved.');
+
+            return $this->redirectToRoute('app_viewAdd', array(
+                'id'    => $id,
+            ));
+        }
+
+        return $this->render('@App/Sit/newAdvert.html.twig', array(       //TODO il faut rediriger la page
+            'form'  => $form->createView(),
+        ));
     }
 
     public function deleteAddAction ()

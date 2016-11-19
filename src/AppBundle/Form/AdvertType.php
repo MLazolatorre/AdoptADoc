@@ -20,7 +20,9 @@ class AdvertType extends AbstractType
             ->add('title',      TextType::class)
             ->add('content',    TextareaType::class)
             ->add('author',     TextType::class)    //TODO Enregistrer dinamiquement l'auteur
-            ->add('image',      ImageType::class)
+            ->add('image',      ImageType::class, array(
+                'required'  => false,
+            ))
             ->add('save',       SubmitType::class)
         ;
     }
