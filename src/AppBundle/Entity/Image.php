@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 /**
  * Image
@@ -149,11 +150,6 @@ class Image
         return $this->getUploadDir() . "/" . $this->id . "." . $this->getExtension();
     }
 
-    /*
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-
     /**
      * we use PreFlush end not PreUpdate because we save $file witch is a attribute but not an element
      * of the data base
@@ -202,7 +198,7 @@ class Image
      */
     public function PreRemoveUpload ()
     {
-        $this->tempFileName = $this->getUploadRootDir() . "/" . $this->getId() . "." . $this->getId();
+        $this->tempFileName = $this->getUploadRootDir() . "/" . $this->getId() . "." . $this->getExtension();
     }
 
     /**
@@ -212,6 +208,9 @@ class Image
     {
         if (file_exists($this->tempFileName)){
             unlink($this->tempFileName);
+        }
+        else{
+            throw new NotFoundResourceException("l'image " . $this->tempFileName . " n'a pas été trouvé");
         }
     }
 

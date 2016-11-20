@@ -36,7 +36,7 @@ class SiteController extends Controller{
 
     public function viewAddAction ($id)
     {
-        //we look for the advert in the DB with the ID
+        //we look for the advert in the DB with the ID '$id'
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
         $advert = $advertRepository->find($id);
 
@@ -63,9 +63,6 @@ class SiteController extends Controller{
             $em->persist($advert);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Advert saved.');
-
-
             return $this->redirectToRoute('app_viewAdd', array(
                 'id' => $advert->getId(),
             ));
@@ -78,9 +75,9 @@ class SiteController extends Controller{
 
     public function editAddAction ($id, Request $request)
     {
-        //we look for the advert in the DB with th eID
-        $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
-        $advert = $advertRepository->find($id);
+        //we look for the advert in the DB with the ID '$id'
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('AppBundle:Advert')->find($id);
 
         //we check if the id exist
         if ($advert == null){
@@ -93,11 +90,7 @@ class SiteController extends Controller{
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
             //no persist because the advert exited already
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
-
-            //flash bag to prevent that the advert was been well saved
-            $request->getSession()->getFlashBag()->add('notice', 'Advert saved.');
 
             return $this->redirectToRoute('app_viewAdd', array(
                 'id'    => $id,
@@ -109,11 +102,35 @@ class SiteController extends Controller{
         ));
     }
 
-    public function deleteAddAction ()
+    public function deleteAddAction (Request $request ,$id)
     {
+        //we look for the advert in the DB with the ID '$id'
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('AppBundle:Advert')->find($id);
 
+        //check if the advert exist
+        if ($advert == null ){
+            throw new NotFoundHttpException("The page with the id : " . $id . " dosen't exist");
+        }
 
-        return $this->render('AppBundle:Default:index.html.twig');
+        $form = $this->get('form.factory')->create();
+
+        //check if we receive a post query => the user want to delete the advert
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            //we remove the advert
+            $em->remove($advert);
+            $em->flush();
+
+            //redirect to the home page
+            return $this->redirectToRoute('app_homepage');
+        }
+
+        //if there is no POST method we return the delete page
+        return $this->render('@App/Sit/delete.html.twig', array(
+            'advert'    =>  $advert,
+            'form'      =>  $form->createView(),
+        ));
     }
 
 }

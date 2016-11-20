@@ -51,7 +51,7 @@ class Advert
 
     /**
      * @var Image
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade = {"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade = {"persist", "remove"})
      */
     private $image;
 

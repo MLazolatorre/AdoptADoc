@@ -24,17 +24,21 @@ app_viewAdd:
     requirements:
         id: \d+
 
-app_editAdd:
-    path:    /edit_add
-    defaults:
-        _controller: AppBundle:Site:EditAdd
-
 app_newAdd:
     path:    /new_add
     defaults:
         _controller: AppBundle:Site:NewAdd
 
+app_editAdd:
+    path:    /edit_add/{id}
+    defaults:
+        _controller: AppBundle:Site:EditAdd
+    requirements:
+        id: \d+
+
 app_deleteAdd:
-    path:    /delete_add
+    path:    /delete_add/{id}
     defaults:
         _controller: AppBundle:Site:DeleteAdd
+    requirements:
+        id: \d+
