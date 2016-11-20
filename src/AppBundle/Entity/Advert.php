@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,14 @@ class Advert
      */
     private $image;
 
+    /**
+     * @var Application
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Application", mappedBy="application", cascade = {"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $applications;
+
 
     /**
      * Advert constructor.
@@ -62,6 +72,7 @@ class Advert
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->applications = new ArrayCollection();
     }
 
     /**
@@ -173,11 +184,11 @@ class Advert
     /**
      * Set image
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param Image $image
      *
      * @return Advert
      */
-    public function setImage(\AppBundle\Entity\Image $image = null)
+    public function setImage(Image $image = null)
     {
         $this->image = $image;
 
@@ -187,10 +198,46 @@ class Advert
     /**
      * Get image
      *
-     * @return \AppBundle\Entity\Image
+     * @return Image
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add application
+     *
+     * @param Application $application
+     *
+     * @return Advert
+     */
+    public function addApplication(Application $application)
+    {
+        $this->applications[] = $application;
+
+        $application->setAdvert($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param Application $application
+     */
+    public function removeApplication(Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 }
