@@ -104,13 +104,14 @@ class SiteController extends Controller{
             ));
         }
 
-        return $this->render('@App/Sit/newAdvert.html.twig', array(       //TODO il faut rediriger la page
+        return $this->render('@App/Sit/newAdvert.html.twig', array(       //TODO KIDJO : il faut rediriger la page
             'form'  => $form->createView(),
         ));
     }
 
     public function deleteAddAction ()
     {
+
 
         return $this->render('AppBundle:Default:index.html.twig');
     }

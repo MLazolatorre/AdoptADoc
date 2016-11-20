@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,7 +20,7 @@ class AdvertType extends AbstractType
         $builder
             ->add('title',      TextType::class)
             ->add('content',    TextareaType::class)
-            ->add('author',     TextType::class)    //TODO Enregistrer dinamiquement l'auteur
+            ->add('author',     TextType::class)    //TODO Marc : Enregistrer dinamiquement l'auteur
             ->add('image',      ImageType::class, array(
                 'required'  => false,
             ))

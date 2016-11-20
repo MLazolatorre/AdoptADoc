@@ -49,6 +49,14 @@ class Image
 
 
     /**
+     * @return string
+     */
+    public function getTempFileName()
+    {
+        return $this->tempFileName;
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -128,7 +136,7 @@ class Image
 
     public function getUploadDir ()
     {
-        return "/upload/img";
+        return "upload/img";
     }
 
     public function getUploadRootDir ()
@@ -138,12 +146,18 @@ class Image
 
     public function getWebPath ()
     {
-        return $this->getUploadRootDir() . "/" . $this->getId() . "." . $this->getExtension();
+        return $this->getUploadDir() . "/" . $this->id . "." . $this->getExtension();
     }
 
-    /**
+    /*
      * @ORM\PrePersist
      * @ORM\PreUpdate
+     */
+
+    /**
+     * we use PreFlush end not PreUpdate because we save $file witch is a attribute but not an element
+     * of the data base
+     * @ORM\PreFlush
      */
     public function preUpload ()
     {
@@ -157,6 +171,7 @@ class Image
     }
 
     /**
+     * we can use PreUpdate because in the preFlush we changed elements form the data base
      * @ORM\PostPersist
      * @ORM\PostUpdate
      */
@@ -198,7 +213,6 @@ class Image
         if (file_exists($this->tempFileName)){
             unlink($this->tempFileName);
         }
-        $this->tempFileName = null;
     }
 
 
