@@ -52,20 +52,20 @@ class Application
     /**
      * @var Advert
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Advert", inversedBy="application")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Advert")
      * @ORM\JoinColumn(nullable=false)
      */
     private $advert;
 
 
-
-
     /**
      * Application constructor.
+     * @param Advert $advert
      */
-    public function __construct()
+    public function __construct(Advert $advert)
     {
         $this->date = new \DateTime();
+        $this->advert = $advert;
     }
 
     /**
