@@ -19,7 +19,7 @@ class SiteController extends Controller{
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
         $listAdvert = $advertRepository->findAll();
 
-        return $this->render('AppBundle:Sit:index.html.twig', array(
+        return $this->render('AppBundle:Site:menu.html.twig ', array(
             'listAdvert' => $listAdvert,
         ));
     }
