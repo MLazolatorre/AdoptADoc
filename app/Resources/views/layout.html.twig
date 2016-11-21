@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Resources/public/css/style.css') }}" type="text/css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <title>{% block title %}AdoptADoc{% endblock %}</title>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">AdoptADoc</a>
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="{{ path (app_showAccount) }}">Account</a>
+                </li>
+                <li>
+                    <a href="#sec">Saved Ads</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>
