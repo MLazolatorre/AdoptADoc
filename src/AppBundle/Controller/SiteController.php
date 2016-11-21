@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Advert;
+use AppBundle\Entity\Application;
 use AppBundle\Form\AdvertType;
+use AppBundle\Form\ApplicationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Debug\Exception\UndefinedFunctionException;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +36,7 @@ class SiteController extends Controller{
         return $this->render('AppBundle:Default:index.html.twig');
     }
 
-    public function viewAddAction ($id)
+    public function viewAddAction (Request $request, $id)
     {
         //we look for the advert in the DB with the ID '$id'
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
@@ -45,8 +47,23 @@ class SiteController extends Controller{
             throw new NotFoundHttpException("The page with the id : " . $id . " dosen't exist");
         }
 
+        $application = new Application($advert);
+
+        $form = $this->get('form.factory')->create(ApplicationType::class, $application);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
+        {
+            $em->persist($application);
+            $em->flush();
+        }
+
+        $listApplication = $em->getRepository('AppBundle:Application')->findAll();
+
         return $this->render('AppBundle:Sit:viewAdd.html.twig', array(
             'advert'    => $advert,
+            'form'      => $form->createView(),
+            'listApplication'   => $listApplication,
         ));
     }
 
