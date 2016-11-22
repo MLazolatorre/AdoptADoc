@@ -3,42 +3,43 @@ app_homepage:
     defaults:
         _controller: AppBundle:Site:index
 
-
 #Account routing
+
 app_createAccount:
     path:    /create_account
     defaults:
-        _controller: AppBundle:Site:CreateAccount
+        _controller: AppBundle:Site:createAccount
 
 app_showAccount:
-    path:    /show_account
+    path:    /show_account{id}
     defaults:
-        _controller: AppBundle:Site:ShowAccount
-
-
-#Addvert routing
-app_viewAdd:
-    path:    /add/{id}
-    defaults:
-        _controller: AppBundle:Site:ViewAdd
+        _controller: AppBundle:Site:showAccount
     requirements:
         id: \d+
 
-app_newAdd:
-    path:    /new_add
+#Advert routing
+app_viewAd:
+    path:    /Ad/{id}
     defaults:
-        _controller: AppBundle:Site:NewAdd
-
-app_editAdd:
-    path:    /edit_add/{id}
-    defaults:
-        _controller: AppBundle:Site:EditAdd
+        _controller: AppBundle:Site:viewAd
     requirements:
         id: \d+
 
-app_deleteAdd:
-    path:    /delete_add/{id}
+app_newAd:
+    path:    /new_Ad
     defaults:
-        _controller: AppBundle:Site:DeleteAdd
+        _controller: AppBundle:Site:newAd
+
+app_editAd:
+    path:    /edit_Ad/{id}
+    defaults:
+        _controller: AppBundle:Site:editAd
+    requirements:
+        id: \d+
+
+app_deleteAd:
+    path:    /delete_Ad/{id}
+    defaults:
+        _controller: AppBundle:Site:deleteAd
     requirements:
         id: \d+
