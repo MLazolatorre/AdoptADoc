@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -9,7 +9,7 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
 /**
  * Image
  *
- * @ORM\Table(name="image")
+ * @ORM\Table(name="image_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -137,7 +137,7 @@ class Image
 
     public function getUploadDir ()
     {
-        return "upload/img/local";
+        return "upload/img/user";
     }
 
     public function getUploadRootDir ()

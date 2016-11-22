@@ -19,26 +19,26 @@ app_showAccount:
 
 #Advert routing
 app_viewAd:
-    path:    /Ad/{id}
+    path:    /ad/{id}
     defaults:
         _controller: AppBundle:Site:viewAd
     requirements:
         id: \d+
 
 app_newAd:
-    path:    /new_Ad
+    path:    /new_ad
     defaults:
         _controller: AppBundle:Site:newAd
 
 app_editAd:
-    path:    /edit_Ad/{id}
+    path:    /edit_ad/{id}
     defaults:
         _controller: AppBundle:Site:editAd
     requirements:
         id: \d+
 
 app_deleteAd:
-    path:    /delete_Ad/{id}
+    path:    /delete_ad/{id}
     defaults:
         _controller: AppBundle:Site:deleteAd
     requirements:

@@ -26,22 +26,4 @@ class User extends BaseUser
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\Image", cascade={"persist","remove"})
      */
     protected $image;
-
-    /**
-     * @param Image $image
-     */
-    public function setImage(Image $image = null)
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \UserBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 }
