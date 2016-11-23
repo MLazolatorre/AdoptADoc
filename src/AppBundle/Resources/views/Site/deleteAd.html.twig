@@ -1,0 +1,10 @@
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+    <h2 style="margin-top: 100px; text-align: center">Are you sure you want to delete this ad?</h2>
+    <form style="text-align: center" action="{{ path('app_deleteAd', {'id': advert.id}) }}" method="post">
+        <a href="{{ path('app_viewAd', {'id': advert.id}) }}"><input type="button" value="Return to ad"></a>
+        <input style="color: black" type="submit" value="Delete">
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

@@ -2,9 +2,10 @@
 <html>
 <head>
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('Resources/public/css/style.css') }}" type="text/css" />
+    <link rel="stylesheet" href={{ asset('bundles/app/css/style.css') }} type="text/css" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% endblock %}
     <title>{% block title %}AdoptADoc{% endblock %}</title>
 </head>
 
@@ -18,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">AdoptADoc</a>
+            <a href={{ path('app_homepage') }} class="navbar-brand">AdoptADoc</a>
         </div>
 
         <nav class="collapse navbar-collapse" role="navigation">
@@ -26,10 +27,10 @@
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a href="{{ path (app_showAccount) }}">Account</a>
+                    <a href="{{ path ('app_createAccount') }}">Create account</a>
                 </li>
                 <li>
-                    <a href="#sec">Saved Ads</a>
+                    <a href={{ path('app_newAd') }}>Create announce</a>
                 </li>
             </ul>
         </nav>

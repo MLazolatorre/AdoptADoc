@@ -21,14 +21,14 @@ class SiteController extends Controller{
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
         $listAdvert = $advertRepository->findAll();
 
-        return $this->render('AppBundle:Site:menu.html.twig ', array(
+        return $this->render('@App/Site/index.html.twig', array(
             'listAdvert' => $listAdvert,
         ));
     }
 
     public function createAccountAction ()
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        return $this->render('@App/Site/createAccount.html.twig');
     }
 
     public function showAccountAction ()
@@ -36,7 +36,7 @@ class SiteController extends Controller{
         return $this->render('AppBundle:Default:index.html.twig');
     }
 
-    public function viewAddAction (Request $request, $id)
+    public function viewAdAction (Request $request, $id)
     {
         //we look for the advert in the DB with the ID '$id'
         $advertRepository = $this->getDoctrine()->getRepository('AppBundle:Advert');
@@ -60,14 +60,14 @@ class SiteController extends Controller{
 
         $listApplication = $em->getRepository('AppBundle:Application')->findAll();
 
-        return $this->render('AppBundle:Sit:viewAdd.html.twig', array(
+        return $this->render('AppBundle:Site:viewAd.html.twig', array(
             'advert'    => $advert,
             'form'      => $form->createView(),
             'listApplication'   => $listApplication,
         ));
     }
 
-    public function newAddAction (Request $request)
+    public function newAdAction (Request $request)
     {
         $advert = new Advert();
 
@@ -80,17 +80,17 @@ class SiteController extends Controller{
             $em->persist($advert);
             $em->flush();
 
-            return $this->redirectToRoute('app_viewAdd', array(
+            return $this->redirectToRoute('app_viewAd', array(
                 'id' => $advert->getId(),
             ));
         }
 
-        return $this->render('AppBundle:Sit:newAdvert.html.twig', array(
+        return $this->render('AppBundle:Site:newAdvert.html.twig', array(
             'form'  =>  $form->createView(),
         ));
     }
 
-    public function editAddAction ($id, Request $request)
+    public function editAdAction ($id, Request $request)
     {
         //we look for the advert in the DB with the ID '$id'
         $em = $this->getDoctrine()->getManager();
@@ -109,17 +109,17 @@ class SiteController extends Controller{
             //no persist because the advert exited already
             $em->flush();
 
-            return $this->redirectToRoute('app_viewAdd', array(
+            return $this->redirectToRoute('app_viewAd', array(
                 'id'    => $id,
             ));
         }
 
-        return $this->render('@App/Sit/newAdvert.html.twig', array(       //TODO KIDJO : il faut rediriger la page
+        return $this->render('@App/Site/editAd.html.twig', array(
             'form'  => $form->createView(),
         ));
     }
 
-    public function deleteAddAction (Request $request ,$id)
+    public function deleteAdAction (Request $request ,$id)
     {
         //we look for the advert in the DB with the ID '$id'
         $em = $this->getDoctrine()->getManager();
@@ -144,7 +144,7 @@ class SiteController extends Controller{
         }
 
         //if there is no POST method we return the delete page
-        return $this->render('@App/Sit/delete.html.twig', array(
+        return $this->render('@App/Site/deleteAd.html.twig', array(
             'advert'    =>  $advert,
             'form'      =>  $form->createView(),
         ));
