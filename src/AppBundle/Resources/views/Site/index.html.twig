@@ -1,48 +1,20 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    <div id="masthead">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-
-                </div>
-            </div>
-        </div><!--/container-->
-    </div><!--/masthead-->
-
-    <!--main-->
-    <div class="container">
-        <div class="row" style="margin-left: 256px">
-            <!--left-->
-            <div class="col-md-3" id="leftCol">
-                <h1>
-                    Account
-                </h1>
-                <div class="roundedImage">
-                    <img src="doc.jpg" alt="1"/>
-                </div>
-                <ul class="nav nav-stacked" id="sidebar">
-                    <li class="category">Name</li>
-                    <li class="category">Location</li>
-                    <li class="category">Specialty</li>
-                </ul>
-            </div><!--/left-->
 
             <!--right-->
-            <div class="col-md-9">
+            <div class="col-md-offset-3 col-md-9">
 
               <ul class="list">
                 {% for advert in listAdvert%}
 
-                        <li style="margin-bottom: 5px; background-color: #dadada; border-radius: 5px; height: 60px; color: white">
-                            <a style="color: #444; " href={{ path('app_viewAd', {'id': advert.id}) }}>{{ advert.title }} by {{ advert.author}}</a>
+                        <li style="margin-top: 5px; padding-top: 18px; margin-bottom: 5px; background-color: #dadada; border-radius: 5px; height: 60px; color: white">
+                            <a style="color: #444" href={{ path('app_viewAd', {'id': advert.id}) }}>{{ advert.title }} by {{ advert.author}}</a>
                         </li>
 
                 {% endfor %}
               </ul>
 
             </div><!--/right-->
-        </div><!--/row-->
-    </div><!--/container-->
+
 {% endblock %}

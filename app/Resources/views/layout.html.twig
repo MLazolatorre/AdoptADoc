@@ -2,9 +2,9 @@
 <html>
 <head>
     {% block stylesheets %}
-    <link rel="stylesheet" href={{ asset('bundles/app/css/style.css') }} type="text/css" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href={{ asset('bundles/app/css/style.css') }} type="text/css"/>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     {% endblock %}
     <title>{% block title %}AdoptADoc{% endblock %}</title>
 </head>
@@ -26,16 +26,67 @@
 
             <ul class="nav navbar-nav">
 
-                <li>
-                    <a href="{{ path ('app_createAccount') }}">Create account</a>
-                </li>
-                <li>
-                    <a href={{ path('app_newAd') }}>Create announce</a>
-                </li>
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                    <li>
+                        <a href={{ path('app_newAd') }}>Create announce</a>
+                    </li>
+                    <li style="padding-bottom: 15px; padding-top: 15px">Logged in as: {{ app.user.username }} |</li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">
+                            Logout
+                        </a></li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('fos_user_registration_register') }}">Create account</a>
+                    </li>
+                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'log in'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                {% endif %}
+
             </ul>
         </nav>
     </div>
 </nav>
+
+<div id="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+
+            </div>
+        </div>
+    </div><!--/container-->
+</div><!--/masthead-->
+
+<!--main-->
+<div class="container">
+    <div class="row" style="margin-left: 256px">
+        <!--left-->
+        <div class="col-md-3" id="leftCol">
+            <h1>
+                Account
+            </h1>
+            <div class="roundedImage">
+                <img src="doc.jpg" alt="1"/>
+            </div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <ul class="nav nav-stacked" id="sidebar">
+                    <li class="category">Name</li>
+                    <li class="category">Location</li>
+                    <li class="category">Specialty</li>
+                </ul>
+            {% else %}
+                <p>You are not logged in! If you want to create an Ad you must have an account. If you d'ont have one
+                    yet
+                    <a style="color: orange" href="{{ path('fos_user_registration_register') }}">create
+                        one</a>, otherwise <a style="color: orange"
+                            href="{{ path('fos_user_security_login') }}">login</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% block body %}
 {% endblock %}
 </body>
