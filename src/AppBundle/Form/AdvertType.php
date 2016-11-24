@@ -21,7 +21,6 @@ class AdvertType extends AbstractType
         $builder
             ->add('title',      TextType::class)
             ->add('content',    TextareaType::class)
-            ->add('author',     TextType::class)    //TODO Marc : Enregistrer dinamiquement l'auteur
             ->add('postalCode', IntegerType::class)
             ->add('city',       TextType::class)
             ->add('address',    TextType::class)
