@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Advert
@@ -38,7 +39,7 @@ class Advert
     private $content;
 
     /**
-     * @var string
+     * @var User
      *
      * @ORM\Column(name="author", type="string", length=255)
      */
@@ -82,10 +83,11 @@ class Advert
     /**
      * Advert constructor.
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         $this->date = new \DateTime();
         $this->applications = new ArrayCollection();
+        $this->author = $user;
     }
 
     /**

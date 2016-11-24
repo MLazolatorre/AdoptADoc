@@ -9,6 +9,7 @@ use AppBundle\Form\ApplicationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 
@@ -92,15 +93,21 @@ class SiteController extends Controller
         }
 
         return $this->render('AppBundle:Site:viewAd.html.twig', array(
-            'advert'    => $advert,
-            'form'      => $form->createView(),
-            'listApplication'   => $advertApplication,
+            'advert'          => $advert,
+            'form'            => $form->createView(),
+            'listApplication' => $advertApplication,
         ));
     }
 
-    public function newAdAction (Request $request)
+    public function newAdAction(Request $request)
     {
-        $advert = new Advert();
+        $user = $this->getUser();
+
+        if ($user == null) {
+            throw new AuthenticationCredentialsNotFoundException("You are not able to create an advert if you are not logged in");
+        }
+
+        $advert = new Advert($user);
 
         $form = $this->get('form.factory')->create(AdvertType::class, $advert);
 
@@ -118,7 +125,7 @@ class SiteController extends Controller
 
 
         return $this->render('AppBundle:Site:newAdvert.html.twig', array(
-            'form'  =>  $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -142,16 +149,16 @@ class SiteController extends Controller
 
             return $this->redirectToRoute('app_viewAd', array(
 
-                'id'    => $id,
+                'id' => $id,
             ));
         }
 
         return $this->render('@App/Site/editAd.html.twig', array(
-            'form'  => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
-    public function deleteAdAction (Request $request ,$id)
+    public function deleteAdAction(Request $request, $id)
 
     {
         //we look for the advert in the DB with the ID '$id'
@@ -177,10 +184,24 @@ class SiteController extends Controller
 
         //if there is no POST method we return the delete page
         return $this->render('@App/Site/deleteAd.html.twig', array(
-            'advert'    =>  $advert,
-            'form'      =>  $form->createView(),
+            'advert' => $advert,
+            'form'   => $form->createView(),
 
         ));
+    }
+
+    public function userMenuAction ()
+    {
+        $user = $this->getUser();
+
+        if ($user == null){
+            throw new AuthenticationCredentialsNotFoundException("You are not logged in : no information");
+        }
+
+        return $this->render(':default:index.html.twig', array(     //TODO kidjo redirige la page
+            'user'  => $user
+        ));
+
     }
 
 }
