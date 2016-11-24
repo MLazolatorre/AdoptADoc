@@ -67,12 +67,13 @@
             <h1>
                 Account
             </h1>
-            <div class="roundedImage">
-                <img src="doc.jpg" alt="1"/>
-            </div>
+
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="roundedImage">
+                    <img src="doc.jpg" alt="1"/>
+                </div>
                 <ul class="nav nav-stacked" id="sidebar">
-                    <li class="category">Name</li>
+                    <li class="category">{{ app.user.username }}</li>
                     <li class="category">Location</li>
                     <li class="category">Specialty</li>
                 </ul>

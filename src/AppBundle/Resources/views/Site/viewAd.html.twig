@@ -15,12 +15,25 @@
     </div>
     <div class="marginBot">
 
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% if app.user == advert.author %}
         <form style="text-align: center">
             <a href="{{ path('app_deleteAd', {'id': advert.id}) }}"><input type="button" value="Delete ad"/></a>
             <a href="{{ path('app_editAd', {'id': advert.id}) }}"><input type="button" value="Edit ad"/></a>
         </form>
         {% endif %}
+        <div style="margin-top: 30px">
+            <h3 style="text-align: center">Comments</h3>
+            <ul>
+            {% for application in listApplication %}
+                <li>
+                    <p style="font-weight: bold">{{ application.author }}:</p><br>
+                    {{ application.content }}
+                    <hr>
+                </li>
+            {% endfor %}
+            </ul>
+            {{ form(form) }}
+        </div>
 
     </div>
 </div>
