@@ -10,7 +10,7 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
  * Image
  *
  * @ORM\Table(name="image_user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\ImageRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Image
@@ -163,7 +163,7 @@ class Image
         }
         //save the file name before persist to save it in the database
         $this->alt = $this->getFile()->getClientOriginalName();
-        $this->extension = $this->getFile()->guessExtension();
+        $this->extension = pathinfo($this->file, PATHINFO_EXTENSION);
     }
 
     /**

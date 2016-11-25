@@ -41,7 +41,8 @@ class Advert
     /**
      * @var User
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -165,7 +166,7 @@ class Advert
     /**
      * Get author
      *
-     * @return string
+     * @return User
      */
     public function getAuthor()
     {

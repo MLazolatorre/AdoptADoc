@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Application
@@ -24,7 +25,8 @@ class Application
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -34,13 +36,6 @@ class Application
      * @ORM\Column(name="content", type="string", length=255)
      */
     private $content;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="speciality", type="string", length=255)
-     */
-    private $speciality;
 
     /**
      * @var \DateTime
@@ -124,30 +119,6 @@ class Application
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Set speciality
-     *
-     * @param string $speciality
-     *
-     * @return Application
-     */
-    public function setSpeciality($speciality)
-    {
-        $this->speciality = $speciality;
-
-        return $this;
-    }
-
-    /**
-     * Get speciality
-     *
-     * @return string
-     */
-    public function getSpeciality()
-    {
-        return $this->speciality;
     }
 
     /**

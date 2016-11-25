@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+</head>
+
+<body>
+<div>
+    <a href="{{ path('app_viewAd', {'id': advert.id}) }}">retour à l'annonce</a>
+    <form action="{{ path('app_deleteAd', {'id': advert.id}) }}" method="post">
+        <input value="delete" type="submit">
+        {{ form_rest(form) }}
+    </form>
+</div>
+
+
+</body>
+
+
+</html>

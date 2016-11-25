@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+</head>
+
+<body>
+    <div>
+        <ul>
+        {% for advert in listAdvert %}
+            <li>
+                <a href="{{ path('app_viewAd', {'id': advert.id }) }}">{{ advert.title }}</a>
+                par {{ advert.author }}
+                le {{ advert.date|date('d/m/Y') }}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <a href="{{ path('app_newAd') }}">new advert</a>
+    </div>
+
+
+</body>
+
+
+</html>

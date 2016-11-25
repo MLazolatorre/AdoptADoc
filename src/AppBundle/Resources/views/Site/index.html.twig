@@ -3,18 +3,15 @@
 {% block body %}
 
             <!--right-->
-            <div class="col-md-offset-3 col-md-9">
 
               <ul class="list">
                 {% for advert in listAdvert%}
 
                         <li style="margin-top: 5px; padding-top: 18px; margin-bottom: 5px; background-color: #dadada; border-radius: 5px; height: 60px; color: white">
-                            <a style="color: #444" href={{ path('app_viewAd', {'id': advert.id}) }}>{{ advert.title }} by {{ advert.author}}</a>
+                            <a style="color: #444" href={{ path('app_viewAd', {'id': advert.id}) }}>{{ advert.title }} by Dr {{ advert.author.lastName}}</a>
                         </li>
 
                 {% endfor %}
               </ul>
-
-            </div><!--/right-->
 
 {% endblock %}

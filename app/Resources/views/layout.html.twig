@@ -69,26 +69,30 @@
             </h1>
 
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <div class="roundedImage">
-                    <img src="doc.jpg" alt="1"/>
-                </div>
+                {% if app.user.image != null %}
+                    <div class="roundedImage">
+                        <img style="height: 80px; width: 80px" src="{{ asset(app.user.image.webPath) }}" alt="1" class="img-circle"/>
+                    </div>
+                {% endif %}
                 <ul class="nav nav-stacked" id="sidebar">
                     <li class="category">{{ app.user.username }}</li>
-                    <li class="category">Location</li>
-                    <li class="category">Specialty</li>
+                    <li class="category">{{ app.user.location }}</li>
+                    <li class="category">{{ app.user.speciality }}</li>
                 </ul>
             {% else %}
                 <p>You are not logged in! If you want to create an Ad you must have an account. If you d'ont have one
                     yet
                     <a style="color: orange" href="{{ path('fos_user_registration_register') }}">create
                         one</a>, otherwise <a style="color: orange"
-                            href="{{ path('fos_user_security_login') }}">login</a>
+                                              href="{{ path('fos_user_security_login') }}">login</a>
                 </p>
             {% endif %}
         </div>
+        <div class="col-md-9">
+            {% block body %}
+            {% endblock %}
+        </div>
     </div>
 </div>
-{% block body %}
-{% endblock %}
 </body>
 </html>

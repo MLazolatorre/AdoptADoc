@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+<div>
+    {{ advert.title }}
+    par {{ advert.author }}
+    le {{ advert.date|date('d/m/y') }}<br>
+    {{ advert.content }}<br>
+    <a href="{{ path('app_deleteAd', {'id': advert.id}) }}">supprimer</a>
+
+    {% if advert.image is not null %}
+        l'id de l'img est : {{ advert.image.id }}<br>
+        le fichier et appeler : {{ advert.image.webPath }}<br>
+        <br>
+        <img src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}">
+    {% endif %}
+</div>
+<div>
+    <ul>
+        {% for application in listApplication %}
+            <li>
+                {{ application.content }}
+                par {{ application.author }}
+                le {{ application.date|date('d/m/y') }}
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="well">
+        {{ form(form) }}
+    </div>
+</div>
+
+
+</body>
+
+
+</html>

@@ -26,13 +26,20 @@
             <ul>
             {% for application in listApplication %}
                 <li>
-                    <p style="font-weight: bold">{{ application.author }}:</p><br>
+                    <p style="font-weight: bold">Dr {{ application.author.lastName }},
+                    {% if application.author.speciality != null %}
+                         speciality: {{ application.author.speciality }}
+                        {% endif %}
+                    </p>
+                    sent the {{ application.date|date('d/m/y') }}  :<br>
                     {{ application.content }}
                     <hr>
                 </li>
             {% endfor %}
             </ul>
-            {{ form(form) }}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ form(form) }}
+            {% endif %}
         </div>
 
     </div>

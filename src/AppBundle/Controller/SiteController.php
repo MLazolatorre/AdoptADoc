@@ -71,12 +71,13 @@ class SiteController extends Controller
             throw new NotFoundHttpException("The page with the id : " . $id . " dosen't exist");
         }
 
-        $application = new Application($advert);
-
-        $form = $this->get('form.factory')->create(ApplicationType::class, $application);
         $em = $this->getDoctrine()->getManager();
 
+        $application = new Application($advert);
+        $form = $this->get('form.factory')->create(ApplicationType::class, $application);
+
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $application->setAuthor($this->getUser());
             $em->persist($application);
             $em->flush();
         }
@@ -190,16 +191,16 @@ class SiteController extends Controller
         ));
     }
 
-    public function userMenuAction ()
+    public function userMenuAction()
     {
         $user = $this->getUser();
 
-        if ($user == null){
+        if ($user == null) {
             throw new AuthenticationCredentialsNotFoundException("You are not logged in : no information");
         }
 
         return $this->render(':default:index.html.twig', array(     //TODO kidjo redirige la page
-            'user'  => $user
+            'user' => $user,
         ));
 
     }
