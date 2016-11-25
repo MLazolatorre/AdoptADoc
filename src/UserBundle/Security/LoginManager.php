@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\UserBundle\Security;
+namespace UserBundle\Security;
 
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;

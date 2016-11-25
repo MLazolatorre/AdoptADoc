@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\UserBundle\Security;
+namespace UserBundle\Security;
 
 class EmailUserProvider extends UserProvider
 {

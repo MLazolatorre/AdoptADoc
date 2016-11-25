@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\UserBundle\DependencyInjection;
+namespace UserBundle\DependencyInjection;
 
 use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
