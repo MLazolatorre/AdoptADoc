@@ -130,3 +130,5 @@ $RECYCLE.BIN/
 !/var/sessions
 !var/SymfonyRequirements.php
 
+tests/
+web/upload/img/user/
