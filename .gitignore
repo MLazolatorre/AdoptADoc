@@ -84,7 +84,7 @@ fabric.properties
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
+/web/bundles/framework
 /web/uploads/
 
 # Assets managed by Bower
@@ -102,10 +102,6 @@ fabric.properties
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
-
-### Symfony Patch ###
-/web/css/
-/web/js/
 
 
 ### Windows ###
@@ -129,20 +125,9 @@ $RECYCLE.BIN/
 *.lnk
 
 
-
-/app/config/parameters.yml
-/build/
-/phpunit.xml
 /var/*
 !/var/cache
-/var/cache/*
-!var/cache/.gitkeep
 !/var/logs
-/var/logs/*
-!var/logs/.gitkeep
 !/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-/vendor/
-/web/bundles/
+

@@ -1,0 +1,85 @@
+#masthead{
+    margin-top: 50px;
+}
+
+#leftCol{
+    background-color: #289adb;
+    color: #FFFFFF;
+    height: 100%;
+    margin-left: -298px !important;
+    position: fixed;
+    width: 300px;
+    border-radius: 2px;
+}
+
+.centeredForm{
+    text-align: center;
+}
+
+.marginBot{
+    margin-bottom: 30px;
+}
+
+form.fos_user_registration_register{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.marginTop{
+    margin-top: 100px;
+}
+
+#titleAdvert{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.advertContainer{
+    background-color: #868686;
+    border-radius: 5px;
+}
+
+.formLayout{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.category {
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+ul.list{
+    text-align: center;
+}
+
+#createAccount{
+    width: 200px;
+    margin-top:50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.createAccountTitle{
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+a{
+    color: #ffffff;
+}
+
+.roundedImage{
+    overflow:hidden;
+   /* -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;*/
+    width:80px;
+    height:80px;
+    margin-top: 20px;
+}
